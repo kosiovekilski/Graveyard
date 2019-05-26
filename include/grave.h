@@ -11,7 +11,7 @@
 
 #define GRAVE_COL	5
 #define GRAVE_ROW	10
-#define GRAVE_FILE	"data/graves.bin" /* file location */
+#define GRAVE_FILE	"../data/graves.bin" /* file location */
 #define GRAVE_BUFF	50 /* grave buffer size */
 
 
