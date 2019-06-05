@@ -153,3 +153,54 @@ void save_grave_15(grave_t *g){
 	g->status = SAVED_GRAVE;
 	(void) strcpy(g->date, date);
 }
+
+void special_dates(grave_t g){
+	time_t		now = time(NULL) ;
+	struct tm	*ts, *td;
+	char		td_date[11]; /* today date */
+	char		sp_date[11]; /* "special" date */
+	bool		cmp = 0;
+
+    ts = localtime(&now); /* today */
+	td = ts;
+
+	/* 40 days */
+	ts->tm_mon += 1; /* error if December */
+	ts->tm_mday += 10; /* error if 21+ */
+
+	//td->tm_mday = 1; /*for test*/
+
+	strftime(td_date, sizeof(td_date), "%02d-%02m-%04Y", td);
+	
+	strftime(sp_date, sizeof(sp_date), "%02d-%02m-%04Y", ts);
+
+	cmp = strcmp(td_date, sp_date);
+
+	if(USED_GRAVE == g.status) {
+		if(0 > cmp){
+			(void) printf("%s's 40 days are soon .. \n");
+		}
+		if(0 == cmp){
+			(void) printf("%s's 40 days are tomorrow! \n");
+		}
+		if(1 == cmp){
+			(void) printf("%s's 40 days are today! \n");
+		}
+	}
+	
+
+	/* one year */
+	ts = td;
+	ts->tm_year += 1;
+
+	strftime(sp_date, sizeof(sp_date), "%02d-%02m-%04Y", ts);
+
+	if(USED_GRAVE == g.status) {
+		if(0 > cmp){
+			(void) printf("%s's 1 year is soon .. \n");
+		}
+		if(0 == cmp){
+			(void) printf("%s's 1 year is today! \n");
+		}
+	}
+}
