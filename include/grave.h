@@ -58,5 +58,6 @@ void save_grave(grave_t *g);
 
 void save_grave_15(grave_t *g);
 
+void special_dates(grave_t g);
 
 #endif
